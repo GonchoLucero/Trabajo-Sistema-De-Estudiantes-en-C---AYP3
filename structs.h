@@ -57,7 +57,8 @@ void modificarMateria(NodoMateria* lista, int id);
 void eliminarMateria(NodoMateria** lista, int id);
 
 // FUNCION INSCRIBIR Y RENDIR MATERIA 
-
+void inscribir(Estudiante* estudiante, NodoMateria* lista);
+void RendirMateria(Estudiante* estudiante, int nota);
 
 // LIMPIAR LISTAS
 void liberarListaEstudiantes(NodoEstudiante* lista);

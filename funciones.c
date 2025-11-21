@@ -213,3 +213,9 @@ void modificarMateria(NodoMateria* lista, int id);
 
 // ELIMINAR //
 void eliminarMateria(NodoMateria** lista, int id);
+
+// INSCRIPCIÓN //
+void inscribir(Estudiante* estudiante, NodoMateria* lista);
+
+// RENDIR MATERIA //
+void rendirMateria(Estudiante* estudiante, int nota);
