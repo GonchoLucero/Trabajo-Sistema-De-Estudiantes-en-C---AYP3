@@ -107,6 +107,59 @@ void menuEstudiantes(NodoEstudiante** lista) {
     } while(opcion != 0);
 }
 
+void menuMaterias(NodoMateria** lista) {
+    int opcion;
+    do {
+        limpiarPantalla();
+        printf("\n");
+        printf("╔════════════════════════════════════════════╗\n");
+        printf("║        GESTIÓN DE MATERIAS                 ║\n");
+        printf("╚════════════════════════════════════════════╝\n");
+        printf("  [1] Dar de alta materia\n");
+        printf("  [2] Listar materias\n");
+        printf("  [3] Modificar materia\n");
+        printf("  [4] Eliminar materia\n");
+        printf("  [0] Volver al menú principal\n");
+        printf("\nOpción: ");
+        scanf("%d", &opcion);
+        getchar();
+        
+        switch(opcion) {
+            case 1:
+                darDeAltaMateria(lista);
+                pausar();
+                break;
+            case 2:
+                listarMaterias(lista);
+                pausar();
+                break;
+            case 3: {
+                int id;
+                printf("Ingrese ID de la materia a modificar: ");
+                scanf("%d", &id);
+                getchar();
+                modificarMateria(*lista, id);
+                pausar();
+                break;
+            }
+            case 4: {
+                int id;
+                listarMaterias(*lista);
+                printf("\nIngrese ID de la materia a eliminar: ");
+                scanf("%d", &id);
+                getchar();
+                eliminarMateria(lista, id);
+                pausar();
+                break;
+            }
+            case 0:
+                break;
+            default:
+                printf("Opción inválida\n");
+                pausar();
+        }
+    } while(opcion != 0);
+}
 
 int main() {
     NodoEstudiante* lista_estudiantes = NULL;
