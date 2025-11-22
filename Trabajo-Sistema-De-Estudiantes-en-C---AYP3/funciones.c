@@ -199,23 +199,120 @@ void buscarEstudiantePorEdad(NodoEstudiante* lista, int min, int max) {
     }
 }
 
-//// MATERIAS ////
+//NODO MATERIAS //
+NodoMateria* crearNodoMateria(Materia mat){
+    NodoMateria* nuevo = malloc(sizeof(NodoMateria));
+    if (!nuevo) {
+        printf("Error al reservar memoria.\n");
+        return;
+    }
+    nuevo->datos = mat;
+    nuevo->siguiente = NULL;
+    return nuevo;
+}
 // FUNCIONES MATERIAS //
 
 // ALTA //
-void darDeAltaMateria(NodoMateria** lista);
+void darDeAltaMateria(NodoMateria** lista){
+    Materia nuevaMateria;
+    printf("\n========== CREAR NUEVA MATERIA ==========\n");
+    printf("Ingrese ID: ");
+    scanf("%d", &nuevaMateria.id);
+
+    printf("Ingrese nombre: ");
+    scanf("%s", nuevaMateria.nombre);
+
+    printf("Ingrese cupo actual: ");
+    scanf("%d", &nuevaMateria.cupo_actual);
+
+    NodoMateria* nuevo = crearNodoMateria(nuevaMateria);
+    if (nuevo == NULL) return;
+
+    nuevo->siguiente = *lista;
+    *lista = nuevo;
+
+    printf("\n✓ Materia '%s' creada exitosamente con ID: %d\n", nuevaMateria.nombre, nuevaMateria.id);
+    printf("============================================\n");
+}
 
 // LISTAR //
-void listarMaterias(NodoMateria* lista);
+void listarMaterias(NodoMateria* lista){
+    if (lista == NULL) {
+        printf("No hay Materias.\n");
+        return;
+    }
+    printf("\n==================== LISTA DE MATERIAS ====================\n");
+    NodoMateria* actual = lista;
+    while(actual!=NULL){
+        printf("ID: %d | Nombre: %s\n",
+               actual->datos.id,
+               actual->datos.nombre);
+        actual = actual->siguiente;
+    }
+    printf("==============================================================\n");
+}
 
 // MODIFICAR //
-void modificarMateria(NodoMateria* lista, int id);
+void modificarMateria(NodoMateria* lista, int id){
+    NodoMateria* materia = buscarMateria(lista,id);
+    if (materia==NULL){
+        printf("No se ha encontrado una materia con el id %d.\n",id);
+        return;
+    }
+    printf("\n--- Modificar Materia ID %d ---\n", id);
+    printf("Nombre actual: %s\n", materia->datos.nombre);
+    printf("Nuevo nombre (Enter para mantener): ");
+    char buffer[MAXIMO_NOMBRE];
+    fgets(buffer, MAXIMO_NOMBRE, stdin);
+    if (buffer[0] != '\n') {
+        strcpy(materia->datos.nombre, buffer);
+    }
+    printf("Materia modificado exitosamente.\n");
+    printf("==============================================================\n");
+}
 
 // ELIMINAR //
-void eliminarMateria(NodoMateria** lista, int id);
+void eliminarMateria(NodoMateria** lista, int id){
+     if (*lista == NULL) {
+        printf("Error: La lista está vacía\n");
+        return;
+    }
 
-// INSCRIPCIÓN //
-void inscribir(Estudiante* estudiante, NodoMateria* lista);
+    NodoMateria* actual = *lista;
+    NodoMateria* anterior = NULL;
 
-// RENDIR MATERIA //
-void rendirMateria(Estudiante* estudiante, int nota);
+    while (actual != NULL && actual->datos.id != id) {
+        anterior = actual;
+        actual = actual->siguiente;
+    }
+
+    if (actual == NULL) {
+        printf("Error: No se encontró la materia con ID %d\n", id);
+        return;
+    }
+
+    if (anterior == NULL) {
+        *lista = actual->siguiente;
+    } else {
+        anterior->siguiente = actual->siguiente;
+    }
+    printf("La Materia '%s' (ID: %d) se ha eliminado.\n", 
+           actual->datos.nombre, actual->datos.id);
+    free(actual);
+}
+
+// BUSCAR //
+NodoMateria* buscarMateria(NodoMateria* lista,int id){
+     if (lista == NULL) {
+        printf("No hay Materias.\n");
+        return NULL;
+    }
+    NodoMateria* actual =lista;
+    while(actual!=NULL){
+        if (actual->datos.id==id){
+            return actual;
+        }
+        actual = actual->siguiente;
+    }
+    return NULL;
+}
