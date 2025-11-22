@@ -119,6 +119,7 @@ void menuMaterias(NodoMateria** lista) {
         printf("  [2] Listar materias\n");
         printf("  [3] Modificar materia\n");
         printf("  [4] Eliminar materia\n");
+        printf("  [5] Buscar materia\n");
         printf("  [0] Volver al menú principal\n");
         printf("\nOpción: ");
         scanf("%d", &opcion);
@@ -152,6 +153,14 @@ void menuMaterias(NodoMateria** lista) {
                 pausar();
                 break;
             }
+            case 5: {
+                int id;
+                printf("Ingrese ID a buscar: ");
+                scanf("&d", &id);
+                buscarMateria(*lista, id);
+                pausar();
+                break;
+            }
             case 0:
                 break;
             default:
@@ -161,6 +170,58 @@ void menuMaterias(NodoMateria** lista) {
     } while(opcion != 0);
 }
 
+void menuInscripcion(NodoEstudiante** listaEst, NodoMateria** listaMat) {
+    int opcion;
+    do {
+        limpiarPantalla();
+        printf("\n");
+        printf("╔════════════════════════════════════════════╗\n");
+        printf("║        INSCRIPCIÓN Y EXÁMENES              ║\n");
+        printf("╚════════════════════════════════════════════╝\n");
+        printf("  [1] Inscribirse a materia\n");
+        printf("  [2] Rendir un examen\n");
+        printf("  [0] Volver al menú principal\n");
+        printf("\nOpción: ");
+        scanf("%d", &opcion);
+        getchar();
+        
+        switch(opcion) {
+            case 1:
+                int id1;
+                printf("Ingrese el ID del estudiante a inscribir: ");
+                scanf("&d", &id1);
+                getchar();
+                int id2;
+                printf("Ingrese el ID de la materia buscada: ");
+                scanf("&d", &id2);
+                getchar();
+                inscribirseAMateria(listaEst, listaMat, id1, id2);
+                pausar();
+                break;
+            case 2:
+                int id1;
+                printf("Ingrese el ID del estudiante a rendir: ");
+                scanf("&d", &id1);
+                getchar();
+                int id2;
+                printf("Ingrese el ID de la materia buscada: ");
+                scanf("&d", &id2);
+                getchar();
+                int nota;
+                printf("Ingrese la nota del estudiante en el examen: ");
+                scanf("&d", &nota);
+                getchar();
+                rendirExamen(listaEst, id1, id2, nota);
+                pausar();
+                break;
+            case 0:
+                break;
+            default:
+                printf("Opción inválida\n");
+                pausar();
+        }
+    } while(opcion != 0);
+}
 int main() {
     NodoEstudiante* lista_estudiantes = NULL;
     NodoMateria* lista_materias = NULL;

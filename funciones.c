@@ -316,3 +316,66 @@ NodoMateria* buscarMateria(NodoMateria* lista,int id){
     }
     return NULL;
 }
+// INSCRIBIRSE A MATERIA //
+void inscribirseAMateria(NodoEstudiante* lista1, NodoMateria* lista2, int id1, int id2) {
+    NodoEstudiante* nodoE = lista1;
+    while (nodoE != NULL && nodoE->datos.id != id1)
+        nodoE = nodoE->siguiente;
+    if (nodoE == NULL) return 0;
+
+    NodoMateria* nodoM = lista2;
+    while (nodoM != NULL && nodoM->datos.id != id2)
+        nodoM = nodoM->siguiente;
+    if (nodoM == NULL) return 0;
+
+    Estudiante* e = &nodoE->datos;
+    Materia* m = &nodoM->datos;
+
+    if (m->cupo_actual <= 0) return 0;
+
+    for (int i = 0; i < e->cantidad_materias; i++) {
+        if (e->materias[i].id_materia == id2) {
+            return 0;
+        }
+    }
+
+    if (e->cantidad_materias >= MAXIMO_MATERIAS)
+        return 0;
+
+    MateriaCursada nueva;
+    nueva.id_materia = m->id;
+    strcpy(nueva.nombre, m->nombre);
+    nueva.aprobada = 0;
+    nueva.nota = 0;
+
+    e->materias[e->cantidad_materias] = nueva;
+    e->cantidad_materias++;
+
+    // Reducir cupo
+    m->cupo_actual--;
+
+    return 1;
+}
+
+// RENDIR MATERIA //
+int rendirExamen(NodoEstudiante* lista, int id1, int id2, int nota) {
+    NodoEstudiante* nodo = lista;
+    while (nodo != NULL && nodo->datos.id != id1)
+        nodo = nodo->siguiente;
+    if (nodo == NULL) return 0;
+
+    Estudiante* e = &nodo->datos;
+
+    for (int i = 0; i < e->cantidad_materias; i++) {
+        if (e->materias[i].id_materia == id2) {
+            if (e->materias[i].aprobada == 1)
+                return 0;
+
+            e->materias[i].nota = nota;
+            e->materias[i].aprobada = 1;
+            return 1;
+        }
+    }
+
+    return 0; // el estudiante no cursa esa materia
+}
