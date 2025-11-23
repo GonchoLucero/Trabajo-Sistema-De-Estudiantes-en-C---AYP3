@@ -31,12 +31,12 @@ typedef struct {
 
 
 // NODOS DE LA LISTA ENLAZADA PARA ESTUDIANTES O MATERIAS
-typedef struct{
+typedef struct NodoEstudiante {
     Estudiante datos;
     struct NodoEstudiante* siguiente;
 } NodoEstudiante;
 
-typedef struct{
+typedef struct NodoMateria {
     Materia datos;
     struct NodoMateria* siguiente;
 } NodoMateria;
@@ -57,6 +57,17 @@ void modificarMateria(NodoMateria* lista, int id);
 void eliminarMateria(NodoMateria** lista, int id);
 
 // FUNCION INSCRIBIR Y RENDIR MATERIA 
+int inscribirseAMateria(NodoEstudiante* lista1, NodoMateria* lista2, int id1, int id2);
+int rendirExamen(NodoEstudiante* lista, int id1, int id2, int nota);
+
+// FUNCIONES AUXILIARES
+NodoEstudiante* buscarEstudiantePorId(NodoEstudiante* lista, int id);
+int idUnicoEstudiante(NodoEstudiante* lista);
+NodoMateria* buscarMateria(NodoMateria* lista, int id);
+
+// FUNCIONES PUNTOS EXTRAS
+void calcularPromedioEstudiante(NodoEstudiante* lista);
+void calcularEstadisticasMateria(NodoEstudiante* lista);
 
 
 // LIMPIAR LISTAS
