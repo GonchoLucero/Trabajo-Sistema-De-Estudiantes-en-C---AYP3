@@ -5,7 +5,7 @@
 #define MAXIMO_NOMBRE 50
 #define MAXIMO_MATERIAS 20
 
-// STRUCT MATERIA 
+// STRUCT MATERIA CURSADA
 typedef struct {
     int id_materia;
     char nombre[MAXIMO_NOMBRE];
@@ -29,7 +29,6 @@ typedef struct {
     int cupo_actual;
 } Materia;
 
-
 // NODOS DE LA LISTA ENLAZADA PARA ESTUDIANTES O MATERIAS
 typedef struct NodoEstudiante {
     Estudiante datos;
@@ -40,7 +39,6 @@ typedef struct NodoMateria {
     Materia datos;
     struct NodoMateria* siguiente;
 } NodoMateria;
-
 
 // FUNCIONES ESTUDIANTES
 void darDeAltaEstudiante(NodoEstudiante** lista);
@@ -68,7 +66,6 @@ NodoMateria* buscarMateria(NodoMateria* lista, int id);
 // FUNCIONES PUNTOS EXTRAS
 void calcularPromedioEstudiante(NodoEstudiante* lista);
 void calcularEstadisticasMateria(NodoEstudiante* lista);
-
 
 // LIMPIAR LISTAS
 void liberarListaEstudiantes(NodoEstudiante* lista);

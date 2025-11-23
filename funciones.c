@@ -54,24 +54,24 @@ void darDeAltaEstudiante(NodoEstudiante** lista){
     
     // DATOS AL USUARIO
     printf("\n========== DAR DE ALTA ESTUDIANTE ==========\n");
-    printf("Nombre: ");
+    printf("Nombre completo: ");
     fgets(nuevoEstudiante.nombre, MAXIMO_NOMBRE, stdin);
     
     printf("Edad: ");
     scanf("%d", &nuevoEstudiante.edad);
+    getchar();
     
     // NUEVO NODO
     NodoEstudiante* nodo_nuevo = crearNodoEstudiante(nuevoEstudiante);
     if (nodo_nuevo == NULL) 
-    return;
+        return;
     
     // INSERTAR AL PRINCIPIO DE LA LISTA
     nodo_nuevo->siguiente = *lista;
     *lista = nodo_nuevo;
     
-    printf("\n✓ Estudiante '%s' agregado exitosamente con ID: %d\n", nuevoEstudiante.nombre, nuevoEstudiante.id);
+    printf("\nEstudiante '%s' agregado exitosamente con ID: %d\n", nuevoEstudiante.nombre, nuevoEstudiante.id);
     printf("============================================\n");
-    getchar();
 }
 
 // LISTAR //
@@ -99,7 +99,7 @@ void modificarEstudiante(NodoEstudiante* lista, int id) {
     NodoEstudiante* estudiante = buscarEstudiantePorId(lista, id);
     
     if (estudiante == NULL) {
-        printf("Error: No se encontró estudiante con ID %d\n", id);
+        printf("Error: No se encontro estudiante con ID %d\n", id);
         return;
     }
     
@@ -127,7 +127,7 @@ void modificarEstudiante(NodoEstudiante* lista, int id) {
 // BAJA //
 void darDeBajaEstudiante(NodoEstudiante** lista, int id) {
     if (*lista == NULL) {
-        printf("Error: La lista está vacía\n");
+        printf("Error: La lista esta vacia\n");
         return;
     }
     
@@ -140,7 +140,7 @@ void darDeBajaEstudiante(NodoEstudiante** lista, int id) {
     }
     
     if (actual == NULL) {
-        printf("Error: No se encontró estudiante con ID %d\n", id);
+        printf("Error: No se encontro estudiante con ID %d\n", id);
         return;
     }
     
@@ -192,7 +192,7 @@ void buscarEstudiantePorEdad(NodoEstudiante* lista, int min, int max) {
     }
     
     int encontrados = 0;
-    printf("\n--- Estudiantes con edad entre %d y %d años ---\n", min, max);
+    printf("\n--- Estudiantes con edad entre %d y %d anos ---\n", min, max);
     
     NodoEstudiante* actual = lista;
     while (actual != NULL) {
@@ -230,7 +230,7 @@ void calcularPromedioEstudiante(NodoEstudiante* lista){
             encontrado = 1;
             
             if (actual->datos.cantidad_materias == 0) {
-                printf("El estudiante '%s' no está cursando ninguna materia.\n", actual->datos.nombre);
+                printf("El estudiante '%s' no esta cursando ninguna materia.\n", actual->datos.nombre);
                 return;
             }
             
@@ -244,7 +244,7 @@ void calcularPromedioEstudiante(NodoEstudiante* lista){
             }
             
             if (materias_aprobadas == 0) {
-                printf("El estudiante '%s' no tiene materias aprobadas aún.\n", actual->datos.nombre);
+                printf("El estudiante '%s' no tiene materias aprobadas aun.\n", actual->datos.nombre);
                 return;
             }
             
@@ -259,7 +259,7 @@ void calcularPromedioEstudiante(NodoEstudiante* lista){
     }
     
     if (!encontrado) {
-        printf("No se encontró un estudiante con ese nombre.\n");
+        printf("No se encontro un estudiante con ese nombre.\n");
     }
 }
 
@@ -274,6 +274,7 @@ NodoMateria* crearNodoMateria(Materia mat){
     nuevo->siguiente = NULL;
     return nuevo;
 }
+
 // FUNCIONES MATERIAS //
 
 // ALTA //
@@ -282,12 +283,15 @@ void darDeAltaMateria(NodoMateria** lista){
     printf("\n========== CREAR NUEVA MATERIA ==========\n");
     printf("Ingrese ID: ");
     scanf("%d", &nuevaMateria.id);
+    getchar();
 
     printf("Ingrese nombre: ");
-    scanf("%s", nuevaMateria.nombre);
+    fgets(nuevaMateria.nombre, MAXIMO_NOMBRE, stdin);
+    nuevaMateria.nombre[strcspn(nuevaMateria.nombre, "\n")] = 0;
 
     printf("Ingrese cupo actual: ");
     scanf("%d", &nuevaMateria.cupo_actual);
+    getchar();
 
     NodoMateria* nuevo = crearNodoMateria(nuevaMateria);
     if (nuevo == NULL) return;
@@ -295,9 +299,8 @@ void darDeAltaMateria(NodoMateria** lista){
     nuevo->siguiente = *lista;
     *lista = nuevo;
 
-    printf("\n✓ Materia '%s' creada exitosamente con ID: %d\n", nuevaMateria.nombre, nuevaMateria.id);
+    printf("\nMateria '%s' creada exitosamente con ID: %d\n", nuevaMateria.nombre, nuevaMateria.id);
     printf("============================================\n");
-    getchar();
 }
 
 // LISTAR //
@@ -340,7 +343,7 @@ void modificarMateria(NodoMateria* lista, int id){
 // ELIMINAR //
 void eliminarMateria(NodoMateria** lista, int id){
      if (*lista == NULL) {
-        printf("Error: La lista está vacía\n");
+        printf("Error: La lista esta vacia\n");
         return;
     }
 
@@ -353,7 +356,7 @@ void eliminarMateria(NodoMateria** lista, int id){
     }
 
     if (actual == NULL) {
-        printf("Error: No se encontró la materia con ID %d\n", id);
+        printf("Error: No se encontro la materia con ID %d\n", id);
         return;
     }
 
@@ -382,6 +385,7 @@ NodoMateria* buscarMateria(NodoMateria* lista,int id){
     }
     return NULL;
 }
+
 // INSCRIBIRSE A MATERIA //
 int inscribirseAMateria(NodoEstudiante* lista1, NodoMateria* lista2, int id1, int id2) {
     NodoEstudiante* nodoE = lista1;
@@ -453,7 +457,7 @@ int rendirExamen(NodoEstudiante* lista, int id1, int id2, int nota) {
 // ESTADISTICAS //
 void calcularEstadisticasMateria(NodoEstudiante* lista){
     int id_materia;
-    printf("\n========== ESTADÍSTICAS DE MATERIA ==========\n");
+    printf("\n========== ESTADISTICAS DE MATERIA ==========\n");
     printf("Ingrese el ID de la materia: ");
     scanf("%d", &id_materia);
     getchar();
@@ -474,7 +478,7 @@ void calcularEstadisticasMateria(NodoEstudiante* lista){
                 printf("Nombre: %s | Edad: %d | Aprobado: %s",
                        actual->datos.nombre,
                        actual->datos.edad,
-                       actual->datos.materias[i].aprobada ? "Sí" : "No");
+                       actual->datos.materias[i].aprobada ? "Si" : "No");
                 
                 if (actual->datos.materias[i].aprobada) {
                     printf(" | Nota: %d", actual->datos.materias[i].nota);
@@ -490,18 +494,18 @@ void calcularEstadisticasMateria(NodoEstudiante* lista){
     }
     
     if (!encontrado) {
-        printf("No se encontró ningún estudiante cursando esa materia.\n");
+        printf("No se encontro ningun estudiante cursando esa materia.\n");
         return;
     }
     
-    printf("\n--- Estadísticas ---\n");
+    printf("\n--- Estadisticas ---\n");
     printf("Total de estudiantes cursando: %d\n", cantEstudiantes);
     printf("Estudiantes que aprobaron: %d\n", estudiantesAprobados);
     
     if (estudiantesAprobados > 0) {
         printf("Promedio general de aprobados: %.2f\n", (float)suma / estudiantesAprobados);
     } else {
-        printf("Aún no hay estudiantes que hayan aprobado esta materia.\n");
+        printf("Aun no hay estudiantes que hayan aprobado esta materia.\n");
     }
     printf("=============================================\n");
 }

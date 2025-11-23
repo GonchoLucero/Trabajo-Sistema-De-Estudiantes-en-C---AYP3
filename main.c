@@ -185,7 +185,10 @@ void menuMaterias(NodoMateria **lista, NodoEstudiante **listaEst)
             NodoMateria* resultado = buscarMateria(*lista, id);
             if (resultado != NULL) {
                 printf("\nMateria encontrada:\n");
-                printf("ID: %d | Nombre: %s\n", resultado->datos.id, resultado->datos.nombre);
+                printf("ID: %d | Nombre: %s | Cupo: %d\n", 
+                       resultado->datos.id, 
+                       resultado->datos.nombre,
+                       resultado->datos.cupo_actual);
             } else {
                 printf("\nNo se encontro una materia con ese ID.\n");
             }
