@@ -54,7 +54,7 @@ void darDeAltaEstudiante(NodoEstudiante** lista){
     
     // DATOS AL USUARIO
     printf("\n========== DAR DE ALTA ESTUDIANTE ==========\n");
-    printf("Nombre completo: ");
+    printf("Nombre: ");
     fgets(nuevoEstudiante.nombre, MAXIMO_NOMBRE, stdin);
     
     printf("Edad: ");

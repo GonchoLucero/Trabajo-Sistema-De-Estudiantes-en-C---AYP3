@@ -52,6 +52,7 @@ void menuEstudiantes(NodoEstudiante **lista)
         printf(" [6] Buscar por rango de edad\n");
         printf(" [7] Calcular promedio de estudiante\n");
         printf(" [0] Volver al menu principal\n");
+        printf("============================================\n");
         printf("\nOpcion: ");
         scanf("%d", &opcion);
         getchar();
@@ -141,6 +142,7 @@ void menuMaterias(NodoMateria **lista, NodoEstudiante **listaEst)
         printf(" [5] Buscar materia\n");
         printf(" [6] Estadisticas de materia\n");
         printf(" [0] Volver al menu principal\n");
+        printf("============================================\n");
         printf("\nOpcion: ");
         scanf("%d", &opcion);
         getchar();
@@ -223,6 +225,7 @@ void menuInscripciones(NodoEstudiante **listaEst, NodoMateria **listaMat)
         printf("  [1] Inscribirse a materia\n");
         printf("  [2] Rendir una materia\n");
         printf("  [0] Volver al menu principal\n");
+        printf("============================================\n");
         printf("\nOpcion: ");
         scanf("%d", &opcion);
         getchar();
@@ -261,6 +264,7 @@ void menuInscripciones(NodoEstudiante **listaEst, NodoMateria **listaMat)
             printf("\nIngrese el ID del estudiante a rendir: ");
             scanf("%d", &id1);
             getchar();
+            listarMaterias(*listaMat);
             printf("Ingrese el ID de la materia: ");
             scanf("%d", &id2);
             getchar();
