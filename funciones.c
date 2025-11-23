@@ -70,14 +70,14 @@ void darDeAltaEstudiante(NodoEstudiante** lista){
     nodo_nuevo->siguiente = *lista;
     *lista = nodo_nuevo;
     
-    printf("\nEstudiante '%s' agregado exitosamente con ID: %d\n", nuevoEstudiante.nombre, nuevoEstudiante.id);
+    printf("\n✅ Estudiante '%s' agregado exitosamente con ID: %d\n", nuevoEstudiante.nombre, nuevoEstudiante.id);
     printf("============================================\n");
 }
 
 // LISTAR //
 void listarEstudiantes(NodoEstudiante* lista) {
     if (lista == NULL) {
-        printf("No hay estudiantes registrados.\n");
+        printf("❌ No hay estudiantes registrados.\n");
         return;
     }
     
@@ -99,7 +99,7 @@ void modificarEstudiante(NodoEstudiante* lista, int id) {
     NodoEstudiante* estudiante = buscarEstudiantePorId(lista, id);
     
     if (estudiante == NULL) {
-        printf("Error: No se encontro estudiante con ID %d\n", id);
+        printf("Error: ❌ No se encontro estudiante con ID %d\n", id);
         return;
     }
     
@@ -121,13 +121,13 @@ void modificarEstudiante(NodoEstudiante* lista, int id) {
         estudiante->datos.edad = nueva_edad;
     }
     
-    printf("Estudiante modificado exitosamente.\n");
+    printf("✅ Estudiante modificado exitosamente.\n");
 }
 
 // BAJA //
 void darDeBajaEstudiante(NodoEstudiante** lista, int id) {
     if (*lista == NULL) {
-        printf("Error: La lista esta vacia\n");
+        printf("Error: ❌ La lista esta vacia\n");
         return;
     }
     
@@ -140,7 +140,7 @@ void darDeBajaEstudiante(NodoEstudiante** lista, int id) {
     }
     
     if (actual == NULL) {
-        printf("Error: No se encontro estudiante con ID %d\n", id);
+        printf("Error:❌ No se encontro estudiante con ID %d\n", id);
         return;
     }
     
@@ -150,7 +150,7 @@ void darDeBajaEstudiante(NodoEstudiante** lista, int id) {
         anterior->siguiente = actual->siguiente;
     }
     
-    printf("Estudiante '%s' (ID: %d) dado de baja exitosamente.\n", 
+    printf(" ✅ Estudiante '%s' (ID: %d) dado de baja exitosamente.\n", 
            actual->datos.nombre, actual->datos.id);
     free(actual);
 }
@@ -158,7 +158,7 @@ void darDeBajaEstudiante(NodoEstudiante** lista, int id) {
 // FILTRAR ESTUDIANTE POR NOMBRE //
 void buscarEstudiantePorNombre(NodoEstudiante* lista, char* nombre) {
     if (lista == NULL) {
-        printf("No hay estudiantes registrados.\n");
+        printf(" ❌ No hay estudiantes registrados.\n");
         return;
     }
     
@@ -178,7 +178,7 @@ void buscarEstudiantePorNombre(NodoEstudiante* lista, char* nombre) {
     }
     
     if (encontrados == 0) {
-        printf("No se encontraron estudiantes con ese nombre.\n");
+        printf("❌ No se encontraron estudiantes con ese nombre.\n");
     } else {
         printf("Total encontrados: %d\n", encontrados);
     }
@@ -207,7 +207,7 @@ void buscarEstudiantePorEdad(NodoEstudiante* lista, int min, int max) {
     }
     
     if (encontrados == 0) {
-        printf("No se encontraron estudiantes en ese rango de edad.\n");
+        printf("❌ No se encontraron estudiantes en ese rango de edad.\n");
     } else {
         printf("Total encontrados: %d\n", encontrados);
     }
@@ -259,7 +259,7 @@ void calcularPromedioEstudiante(NodoEstudiante* lista){
     }
     
     if (!encontrado) {
-        printf("No se encontro un estudiante con ese nombre.\n");
+        printf("❌ No se encontro un estudiante con ese nombre.\n");
     }
 }
 
@@ -294,12 +294,13 @@ void darDeAltaMateria(NodoMateria** lista){
     getchar();
 
     NodoMateria* nuevo = crearNodoMateria(nuevaMateria);
-    if (nuevo == NULL) return;
+    if (nuevo == NULL) 
+    return;
 
     nuevo->siguiente = *lista;
     *lista = nuevo;
 
-    printf("\nMateria '%s' creada exitosamente con ID: %d\n", nuevaMateria.nombre, nuevaMateria.id);
+    printf("\n ✅ Materia '%s' creada exitosamente con ID: %d\n", nuevaMateria.nombre, nuevaMateria.id);
     printf("============================================\n");
 }
 
@@ -325,7 +326,7 @@ void listarMaterias(NodoMateria* lista){
 void modificarMateria(NodoMateria* lista, int id){
     NodoMateria* materia = buscarMateria(lista,id);
     if (materia==NULL){
-        printf("No se ha encontrado una materia con el id %d.\n",id);
+        printf("❌ No se ha encontrado una materia con el id %d.\n",id);
         return;
     }
     printf("\n--- Modificar Materia ID %d ---\n", id);
@@ -336,14 +337,14 @@ void modificarMateria(NodoMateria* lista, int id){
     if (buffer[0] != '\n') {
         strcpy(materia->datos.nombre, buffer);
     }
-    printf("Materia modificado exitosamente.\n");
+    printf(" ✅ Materia modificado exitosamente.\n");
     printf("==============================================================\n");
 }
 
 // ELIMINAR //
 void eliminarMateria(NodoMateria** lista, int id){
      if (*lista == NULL) {
-        printf("Error: La lista esta vacia\n");
+        printf("Error:❌ La lista esta vacia\n");
         return;
     }
 
@@ -356,7 +357,7 @@ void eliminarMateria(NodoMateria** lista, int id){
     }
 
     if (actual == NULL) {
-        printf("Error: No se encontro la materia con ID %d\n", id);
+        printf("Error:❌ No se encontro la materia con ID %d\n", id);
         return;
     }
 
@@ -494,7 +495,7 @@ void calcularEstadisticasMateria(NodoEstudiante* lista){
     }
     
     if (!encontrado) {
-        printf("No se encontro ningun estudiante cursando esa materia.\n");
+        printf("❌ No se encontro ningun estudiante cursando esa materia.\n");
         return;
     }
     

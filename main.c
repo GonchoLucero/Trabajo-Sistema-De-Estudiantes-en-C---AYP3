@@ -22,7 +22,7 @@ void mostrarMenuPrincipal()
 {
     printf("\n");
     printf("============================================\n");
-    printf("    SISTEMA DE ESTUDIANTES EN C       \n");
+    printf("    📚 SISTEMA DE ESTUDIANTES EN C 📚       \n");
     printf("============================================\n");
     printf("\n");
     printf(" [1] Sistema de Estudiantes\n");
@@ -42,7 +42,7 @@ void menuEstudiantes(NodoEstudiante **lista)
         limpiarPantalla();
         printf("\n");
         printf("============================================\n");
-        printf("      SISTEMA DE ESTUDIANTES                \n");
+        printf("    👨‍🎓  SISTEMA DE ESTUDIANTES 👨‍🎓           \n");
         printf("============================================\n");
         printf(" [1] Dar de alta estudiante\n");
         printf(" [2] Listar estudiantes\n");
@@ -119,7 +119,7 @@ void menuEstudiantes(NodoEstudiante **lista)
         case 0:
             break;
         default:
-            printf("Opcion invalida\n");
+            printf("❌ Opcion invalida\n");
             pausa();
         }
     } while (opcion != 0);
@@ -133,7 +133,7 @@ void menuMaterias(NodoMateria **lista, NodoEstudiante **listaEst)
         limpiarPantalla();
         printf("\n");
         printf("============================================\n");
-        printf("        SISTEMA DE MATERIAS                 \n");
+        printf("      📖   SISTEMA DE MATERIAS 📖          \n");
         printf("============================================\n");
         printf(" [1] Dar de alta materia\n");
         printf(" [2] Listar materias\n");
@@ -192,7 +192,7 @@ void menuMaterias(NodoMateria **lista, NodoEstudiante **listaEst)
                        resultado->datos.nombre,
                        resultado->datos.cupo_actual);
             } else {
-                printf("\nNo se encontro una materia con ese ID.\n");
+                printf("\n❌ No se encontro una materia con ese ID.\n");
             }
             pausa();
             break;
@@ -206,7 +206,7 @@ void menuMaterias(NodoMateria **lista, NodoEstudiante **listaEst)
         case 0:
             break;
         default:
-            printf("Opcion invalida\n");
+            printf("❌ Opcion invalida\n");
             pausa();
         }
     } while (opcion != 0);
@@ -220,7 +220,7 @@ void menuInscripciones(NodoEstudiante **listaEst, NodoMateria **listaMat)
         limpiarPantalla();
         printf("\n");
         printf("============================================\n");
-        printf("        INSCRIPCION Y EXAMENES              \n");
+        printf("      📄  INSCRIPCION Y EXAMENES 📄         \n");
         printf("============================================\n");
         printf("  [1] Inscribirse a materia\n");
         printf("  [2] Rendir una materia\n");
@@ -249,7 +249,7 @@ void menuInscripciones(NodoEstudiante **listaEst, NodoMateria **listaMat)
             }
             else
             {
-                printf("\nError en la inscripcion. Verifique:\n");
+                printf("\n❌ Error en la inscripcion. Verifique:\n");
                 printf("- Que el estudiante y la materia existan\n");
                 printf("- Que haya cupo disponible\n");
                 printf("- Que el estudiante no este ya inscrito\n");
@@ -277,9 +277,9 @@ void menuInscripciones(NodoEstudiante **listaEst, NodoMateria **listaMat)
             }
             else
             {
-                printf("\nError al registrar el examen. Verifique:\n");
+                printf("\n❌ Error al registrar el examen. Verifique:\n");
                 printf("- Que el estudiante este inscrito en la materia\n");
-                printf("- Que la materia no este ya aprobada\n");
+                printf("- Que la materia no este aprobada\n");
             }
             pausa();
             break;
